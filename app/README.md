@@ -1,7 +1,7 @@
 # EU NAMs / 3Rs Funding Explorer
 ## A Streamlit Dashboard for Visualising NAM/3RS Related EU Funded Project Categories + Searching CORDIS NAM/3Rs Projects
 
-The app is available via Streamlit at the following link: (LINK TBD)
+The app is available via Streamlit at the following link: https://eu-nam-3r-explorer.streamlit.app/
 
 This project provides a dashboard to explore EU-funded New Approach Methodologies (NAMs) and 3Rs (Replacement, Reduction, Refinement) research projects funded by the EU between 2007 and 2025.
 It includes:
