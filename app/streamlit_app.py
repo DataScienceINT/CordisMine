@@ -6,7 +6,7 @@ import numpy as np
 
 from sentence_transformers import SentenceTransformer
 from rank_bm25 import BM25Okapi
-
+from pathlib import Path
 import altair as alt
 
 st.set_page_config(page_title="🔬EU NAMs Dashboard", layout="wide")
@@ -14,9 +14,11 @@ st.set_page_config(page_title="🔬EU NAMs Dashboard", layout="wide")
 # -----------------------------
 # Load data + build indexes
 # -----------------------------
+BASE_DIR = Path(__file__).resolve().parent
+
 @st.cache_resource
 def load_index():
-    df = pd.read_csv("CORDIS_NAM_PROJECTS.csv")
+    df = pd.read_csv(BASE_DIR / "CORDIS_NAM_PROJECTS.csv")
     df = df.where(pd.notnull(df), None)
 
     texts = (
@@ -28,7 +30,7 @@ def load_index():
     tokenized = [t.lower().split() for t in texts]
     bm25 = BM25Okapi(tokenized)
 
-    embeddings = np.load("project_embeddings.npy")
+    embeddings = np.load(BASE_DIR / "project_embeddings.npy")
 
     emb_model = SentenceTransformer("all-MiniLM-L6-v2")
 
@@ -58,7 +60,7 @@ st.write("Categories and labels were assigned using a semi-automated approach (s
 "Categories included toxicology terms, organ types, disease types, lab methods, in silico methods, small animal models and key policy terms. " \
 "Hover over bars for details. ")
 # Load the file
-labels_df = pd.read_csv("ALL_PROJECT_LABELS.csv")
+labels_df = pd.read_csv(BASE_DIR / "ALL_PROJECT_LABELS.csv")
 
 # --------------------------
 # HARD CLEANING FUNCTION
